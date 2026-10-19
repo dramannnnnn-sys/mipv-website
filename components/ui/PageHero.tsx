@@ -33,7 +33,7 @@ export function PageHero({
         sizes="100vw"
         className="-z-10 object-cover object-center opacity-90"
       />
-      <div className={cx("container-site relative grid items-center gap-10 py-12 md:py-16 lg:py-20", aside && "lg:grid-cols-12")}>
+      <div className={cx("container-site relative grid items-center gap-10 py-12 md:py-16 lg:py-20", aside ? "lg:grid-cols-12" : undefined)}>
         <div className={aside ? "lg:col-span-7" : "max-w-4xl"}>
           <nav aria-label={breadcrumbLabel}>
             <ol className="flex flex-wrap items-center gap-1.5 text-[0.9375rem] font-semibold text-muted">
