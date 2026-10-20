@@ -1,6 +1,6 @@
 # MIPV Website: Deployment Guide
 
-This guide takes the project from your computer to **https://mipv.com.my** on Vercel. Nothing in this project changes DNS or connects the domain for you. Every step that touches the domain or email must be done, and confirmed, in your registrar, DNS and email provider accounts.
+This guide takes the project from your computer to **https://mipv.com.my** on Netlify. Nothing in this project changes DNS or connects the domain for you. Every step that touches the domain or email must be done, and confirmed, in your registrar, DNS and email provider accounts.
 
 > **Status at hand-over**
 > - Website source code: complete.
@@ -49,47 +49,60 @@ git push -u origin main
 
 `.env.local` is ignored by `.gitignore`. Never commit API keys or passwords.
 
-## 3. Deploy to Vercel
+## 3. Deploy to Netlify
 
-1. Sign in at https://vercel.com, ideally with the same GitHub account.
-2. Choose **Add New → Project** and import the `mipv-website` repository.
-3. Vercel detects **Next.js** automatically. Keep the default build settings.
-4. Under **Environment Variables**, add the values from section 7. You can skip the email values for now and add them later.
-5. Click **Deploy**. You will get a URL such as `mipv-website.vercel.app`. Test it (section 8).
+The site is hosted on **Netlify**. Netlify's Free plan permits commercial websites and supports Next.js with no extra configuration. The included `netlify.toml` sets the build command and the Node.js version.
 
-Preview deployments (any branch other than `main`) automatically send `Disallow: /` in robots.txt, so search engines index only production.
+1. Sign up at https://app.netlify.com. Choose **Sign up with GitHub** so the two accounts are linked.
+2. Choose **Add new project → Import an existing project → GitHub**, and authorise Netlify to access the `mipv-website` repository.
+3. Netlify detects **Next.js** automatically. Keep the defaults: build command `npm run build`, with the publish directory managed by the Next.js adapter.
+4. Under **Environment variables**, add the values from section 7. You can skip the email values for now and add them later.
+5. Click **Deploy**. You will get a URL such as `mipv.netlify.app`. Rename it under **Project configuration → Change project name** if you like. Test it (section 8).
+
+**About Free plan credits.** The Free plan includes a monthly allowance of credits. Each production deploy, plus bandwidth and requests, uses some of them. A corporate site like this one normally stays well within the allowance, but note the following:
+- Avoid many small deploys in quick succession. Group content changes into one push.
+- Watch **Team → Usage & billing** during the first month.
+- If the credits run out, Netlify pauses the site until the next cycle or until you upgrade. Upgrading to a paid plan is always possible.
+
+Deploy previews and branch deploys automatically send `Disallow: /` in robots.txt, so search engines index only production.
 
 ## 4. Connect the custom domain
 
-In Vercel, open **Project → Settings → Domains**:
+In Netlify, open **Project → Domain management → Add a domain**:
 
-1. Add `mipv.com.my`.
-2. Add `www.mipv.com.my`. When Vercel asks, choose to **redirect `www.mipv.com.my` → `mipv.com.my`** (308). The apex domain is the canonical address used in the sitemap and SEO tags.
-3. Vercel then shows the DNS records it needs. **Use the exact values Vercel displays for your project.** They usually look like this:
+1. Add `mipv.com.my` and confirm that you own it.
+2. Netlify also adds `www.mipv.com.my`. Set **mipv.com.my as the primary domain**, so `www` redirects to it. The apex domain is the canonical address used in the sitemap and SEO tags.
+3. Choose to keep DNS at your current provider (**external DNS**, i.e. Exabytes). Netlify then shows the records to create. They are normally:
 
-| Type | Name / Host | Value (confirm in Vercel) | Purpose |
+| Type | Name / Host | Value (confirm in Netlify) | Purpose |
 |---|---|---|---|
-| A | `@` (mipv.com.my) | `76.76.21.21`, or the project-specific IP Vercel shows | Apex domain |
-| CNAME | `www` | `cname.vercel-dns.com`, or the project-specific target Vercel shows | www subdomain |
+| A | `@` (mipv.com.my) | `75.2.60.5` | Apex domain |
+| CNAME | `www` | `<your-project-name>.netlify.app` | www subdomain |
 
-## 5. DNS records at your registrar
+## 5. DNS records at Exabytes
 
-`.com.my` domains are managed through a MYNIC-accredited registrar or reseller. Log in to whichever company manages `mipv.com.my` and open its **DNS / Zone Editor**.
+The domain `mipv.com.my` is registered with **Exabytes**.
 
-Confirm these points with the registrar or hosting provider before you change anything:
+1. Log in to the Exabytes Client Area and go to **Domains → My Domains → mipv.com.my**. Menu names may differ slightly.
+2. Open **DNS Management**. This is available when the domain uses the Exabytes nameservers. If the domain points to other nameservers, edit the records wherever those nameservers are managed.
+3. Add or replace the records:
+   - **A**, host `@`, value `75.2.60.5`
+   - **CNAME**, host `www`, value `<your-project-name>.netlify.app`
+4. Save the changes.
 
-- **Where DNS is hosted.** It might be the registrar, a hosting company (cPanel), or Cloudflare. Records must be edited where the domain's **nameservers** point.
-- **Existing A / CNAME records** for `@` and `www`, such as an old hosting page. Replace them with the Vercel values. Do not leave two conflicting A records for `@`.
+Confirm these points with Exabytes before you change anything:
+
+- **Existing A / CNAME records** for `@` and `www`, such as a parking page. Replace them with the Netlify values. Do not leave two conflicting A records for `@`.
 - **MX records.** These control email (`enquiry@mipv.com.my`). **Do not delete or change MX records** when you connect the website. The website and the mailbox are separate services.
 - **TTL.** A low TTL (300–3600 seconds) makes changes visible faster.
 
-After saving, Vercel shows each domain as **Valid Configuration** once DNS has propagated. This takes from a few minutes up to 24–48 hours.
+Also turn on **Registrar Lock** for the domain in Exabytes. This protects the domain against unauthorised transfer and does not affect DNS changes.
 
-**Using Cloudflare DNS?** Set both records to **DNS only** (grey cloud) so that Vercel can issue the SSL certificate, or follow Vercel's Cloudflare guidance.
+Netlify shows the domain as verified once DNS has propagated. This takes from a few minutes up to 24–48 hours.
 
 ## 6. HTTPS / SSL
 
-Vercel issues and renews SSL certificates automatically once the DNS records are correct. You do not need to buy or upload a certificate. The site also sends an HSTS header. Confirm the following:
+Netlify issues and renews a free Let's Encrypt certificate automatically once DNS is correct. See **Domain management → HTTPS**, where you can choose **Verify DNS configuration** and then **Provision certificate** if it has not started on its own. The site also sends an HSTS header. Confirm the following:
 
 - `https://mipv.com.my` loads with a valid padlock.
 - `http://mipv.com.my` redirects to `https://`.
@@ -103,14 +116,14 @@ Vercel issues and renews SSL certificates automatically once the DNS records are
 
 ### 7b. Choose a sending provider
 
-**Option A: Resend (recommended).** It is simple and reliable from Vercel.
+**Option A: Resend (recommended).** It is simple and reliable from Netlify.
 
 1. Create an account at https://resend.com.
 2. Go to **Domains → Add Domain** and enter `mipv.com.my`. Using a sending subdomain such as `send.mipv.com.my` keeps it separate from your mailbox records.
 3. Resend shows several DNS records: SPF (TXT), DKIM (TXT) and an MX record for bounces on the sending subdomain. Add them **exactly as shown** at your DNS host. These records are in addition to your mailbox's existing MX records; they do not replace them.
 4. Wait until Resend shows the domain as **Verified**.
 5. Create an **API key** with sending access.
-6. In Vercel, add:
+6. In Netlify (**Project configuration → Environment variables**), add:
 
 ```
 RESEND_API_KEY=re_xxxxxxxxx
@@ -132,7 +145,7 @@ CONTACT_TO_EMAIL=enquiry@mipv.com.my
 
 Use an **app password** wherever the provider requires one. Google and Microsoft accounts with 2FA do.
 
-After you add or change variables, **redeploy** (Vercel → Deployments → Redeploy).
+After you add or change variables, **redeploy** (Netlify → Deploys → Trigger deploy → Deploy project).
 
 ### How delivery behaves
 
@@ -140,7 +153,7 @@ After you add or change variables, **redeploy** (Vercel → Deployments → Rede
 - If email is not configured, the visitor is told the online form is not yet available, and the message is not sent.
 - If the provider rejects the message, the visitor sees an error and is offered email, telephone and WhatsApp.
 - Each email includes all form fields. **Reply-To** is set to the visitor's address, so you can reply directly.
-- Server logs (Vercel → Project → Logs) record configuration problems, for example `Email delivery is not configured. Missing: …`.
+- Function logs (Netlify → Logs → Functions) record configuration problems, for example `Email delivery is not configured. Missing: …`.
 
 ### 7c. Spam protection
 
@@ -156,8 +169,8 @@ These protections are built in and need no setup:
 
 **Recommended addition: Cloudflare Turnstile** (free and privacy-friendly):
 
-1. In the Cloudflare dashboard, open **Turnstile → Add widget**. Add the hostnames `mipv.com.my` and `www.mipv.com.my`, and your `*.vercel.app` URL if you want to test there.
-2. Add to Vercel:
+1. In the Cloudflare dashboard, open **Turnstile → Add widget**. Add the hostnames `mipv.com.my` and `www.mipv.com.my`, and your `*.netlify.app` URL if you want to test there.
+2. Add to Netlify environment variables:
 
 ```
 NEXT_PUBLIC_TURNSTILE_SITE_KEY=0x4AAAAAAA...
@@ -181,7 +194,7 @@ To see what is still missing locally, run `node --env-file=.env.local scripts/ch
 
 ## 8. Testing checklist
 
-Run these checks first on the `*.vercel.app` URL, then again on `https://mipv.com.my`.
+Run these checks first on the `*.netlify.app` URL, then again on `https://mipv.com.my`.
 
 **Pages and language**
 - [ ] `/` redirects to `/en`. All 9 pages load in `/en/...` and `/bm/...`.
@@ -211,13 +224,13 @@ Run these checks first on the `*.vercel.app` URL, then again on `https://mipv.co
 1. Confirm that sections 4–8 are complete.
 2. Add the site to **Google Search Console**. Verify `mipv.com.my` using a DNS TXT record, then submit `https://mipv.com.my/sitemap.xml`.
 3. Optionally add a **Google Business Profile** as a service-area business without a public address. The business operates remotely from Nilai, so do not publish a street address.
-4. Keep the Vercel project, GitHub repository, DNS, and email provider logins in a secure shared password manager.
+4. Keep the Netlify project, GitHub repository, DNS, and email provider logins in a secure shared password manager.
 
 ## 10. Items needing credentials or confirmation before launch
 
 | Item | Who / where |
 |---|---|
-| DNS access for `mipv.com.my` | Domain registrar or DNS host |
+| DNS access for `mipv.com.my` | Exabytes Client Area |
 | Mailbox `enquiry@mipv.com.my` | Email provider (Google Workspace, Microsoft 365, Zoho, hosting) |
 | Resend API key and domain verification, **or** SMTP credentials | Resend, or your email provider |
 | Cloudflare Turnstile keys (optional) | Cloudflare account |

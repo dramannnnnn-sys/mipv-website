@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { illustrations } from "@/lib/media";
 import { cx } from "./primitives";
+import { MalaysiaMap } from "./MalaysiaMap";
 
 type Name = keyof typeof illustrations;
 
@@ -16,6 +17,8 @@ export function Illustration({
   className?: string;
   priority?: boolean;
 }) {
+  // The Malaysia map is rendered with its animated network overlay.
+  if (name === "malaysiaMap") return <MalaysiaMap alt={alt} className={className} />;
   const ill = illustrations[name];
   return (
     <Image

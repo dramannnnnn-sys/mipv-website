@@ -18,6 +18,8 @@ function fail(code: ErrorCode, status: number, extra: Record<string, unknown> = 
 }
 
 function clientIp(req: NextRequest) {
+  const nf = req.headers.get("x-nf-client-connection-ip"); // Netlify
+  if (nf) return nf.trim().slice(0, 64);
   const fwd = req.headers.get("x-forwarded-for");
   return (fwd ? fwd.split(",")[0] : req.headers.get("x-real-ip") || "unknown").trim().slice(0, 64);
 }

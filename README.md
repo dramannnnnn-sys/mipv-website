@@ -19,7 +19,7 @@ Production build:
 npm run build && npm start
 ```
 
-You need Node.js 20.9 or newer. See **[DEPLOYMENT.md](./DEPLOYMENT.md)** for GitHub, Vercel, the domain, DNS, SSL and email setup.
+You need Node.js 20.9 or newer. See **[DEPLOYMENT.md](./DEPLOYMENT.md)** for GitHub, Netlify, the domain (Exabytes DNS), SSL and email setup.
 
 ## Routes
 
@@ -67,7 +67,7 @@ app/
   [lang]/            Localised pages (layout, home, about, … , not-found)
   api/contact/       Enquiry endpoint (validation, spam protection, email)
   sitemap.ts         sitemap.xml with hreflang alternates
-  robots.ts          robots.txt (blocks Vercel preview deployments)
+  robots.ts          robots.txt (blocks Netlify/Vercel preview deployments)
   manifest.ts        Web app manifest
 components/
   layout/            Header, Footer, LanguageSwitcher
