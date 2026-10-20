@@ -319,7 +319,22 @@
     opacity: 0;
   }
 }
+.map-sway {
+  animation: map-sway 14s ease-in-out infinite alternate;
+}
+@keyframes map-sway {
+  from {
+    transform: rotateZ(-1.5deg) rotateX(-2deg);
+  }
+  to {
+    transform: rotateZ(1.5deg) rotateX(2deg);
+  }
+}
 @media (prefers-reduced-motion: reduce) {
+  .map3d * {
+    transition: none !important;
+  }
+  .map-sway,
   .map-flow,
   .map-pulse {
     animation: none;
