@@ -2,6 +2,8 @@
  * Interconnection diagram: eight organisational dimensions arranged around
  * MIPV, each connected to every other — the integrated perspective at the
  * heart of MIPV's positioning. Pure SVG, scales crisply at any size.
+ * Gently animated with CSS (flowing links, pulsing nodes, rotating ring,
+ * shimmering web); animation stops for visitors with "reduce motion" on.
  */
 export function ConnectionsDiagram({ labels, title }: { labels: string[]; title: string }) {
   const W = 780;
@@ -21,24 +23,60 @@ export function ConnectionsDiagram({ labels, title }: { labels: string[]; title:
     <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-labelledby="connections-title" className="h-auto w-full">
       <title id="connections-title">{`${title}: ${labels.join(", ")}`}</title>
       <circle cx={c} cy={cy} r={r + 42} fill="none" stroke="#e5dedd" strokeWidth="1" />
+      <circle cx={c} cy={cy} r={r + 70} fill="none" stroke="#8b3047" strokeOpacity="0.25" strokeWidth="1" strokeDasharray="3 14" className="web-spin" />
       <circle cx={c} cy={cy} r={r} fill="none" stroke="#e5dedd" strokeWidth="1" strokeDasharray="2 6" />
-      {lines.map(([i, j]) => (
-        <line
-          key={`${i}-${j}`}
-          x1={nodes[i].x}
-          y1={nodes[i].y}
-          x2={nodes[j].x}
-          y2={nodes[j].y}
-          stroke="#8b3047"
-          strokeOpacity={Math.abs(i - j) === 1 || Math.abs(i - j) === nodes.length - 1 ? 0.45 : 0.14}
-          strokeWidth="1.2"
-        />
-      ))}
-      {nodes.map((n) => (
-        <line key={`spoke-${n.label}`} x1={c} y1={cy} x2={n.x} y2={n.y} stroke="#5f0718" strokeOpacity="0.35" strokeWidth="1.5" />
+      {lines.map(([i, j], k) => {
+        const ring = Math.abs(i - j) === 1 || Math.abs(i - j) === nodes.length - 1;
+        return (
+          <g key={`${i}-${j}`}>
+            <line
+              x1={nodes[i].x}
+              y1={nodes[i].y}
+              x2={nodes[j].x}
+              y2={nodes[j].y}
+              stroke="#8b3047"
+              strokeOpacity={ring ? 0.45 : 0.14}
+              strokeWidth="1.2"
+              className={ring ? undefined : "web-glow"}
+              style={ring ? undefined : { animationDelay: `${((k * 0.71) % 6).toFixed(2)}s` }}
+            />
+            {ring && (
+              <line
+                x1={nodes[i].x}
+                y1={nodes[i].y}
+                x2={nodes[j].x}
+                y2={nodes[j].y}
+                stroke="#7a0019"
+                strokeOpacity="0.85"
+                strokeWidth="2"
+                strokeLinecap="round"
+                className="map-flow"
+                style={{ animationDelay: `${(i * -0.3).toFixed(2)}s` }}
+              />
+            )}
+          </g>
+        );
+      })}
+      {nodes.map((n, i) => (
+        <g key={`spoke-${n.label}`}>
+          <line x1={c} y1={cy} x2={n.x} y2={n.y} stroke="#5f0718" strokeOpacity="0.35" strokeWidth="1.5" />
+          <line
+            x1={n.x}
+            y1={n.y}
+            x2={c}
+            y2={cy}
+            stroke="#5f0718"
+            strokeOpacity="0.8"
+            strokeWidth="2"
+            strokeLinecap="round"
+            className="web-signal"
+            style={{ animationDelay: `${(i * 0.5).toFixed(2)}s` }}
+          />
+        </g>
       ))}
       {/* Centre mark: rotated square (the diamond motif from the brand backgrounds) */}
       <g transform={`rotate(45 ${c} ${cy})`}>
+        <rect x={c - 58} y={cy - 58} width="116" height="116" fill="#7a0019" className="web-halo" />
         <rect x={c - 58} y={cy - 58} width="116" height="116" fill="#ffffff" stroke="#5f0718" strokeWidth="2" />
         <rect x={c - 48} y={cy - 48} width="96" height="96" fill="#5f0718" />
       </g>
@@ -58,6 +96,7 @@ export function ConnectionsDiagram({ labels, title }: { labels: string[]; title:
         const dy = Math.sin(n.a) > 0.5 ? 14 : Math.sin(n.a) < -0.5 ? -4 : 6;
         return (
           <g key={n.label}>
+            <circle cx={n.x} cy={n.y} r={13} fill={tones[i % 4]} fillOpacity={0.4} className="map-pulse" style={{ animationDelay: `${(i * 0.35).toFixed(2)}s` }} />
             <rect
               x={n.x - 11}
               y={n.y - 11}

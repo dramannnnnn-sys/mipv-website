@@ -330,7 +330,74 @@
     transform: rotateZ(1.5deg) rotateX(2deg);
   }
 }
+/* Animated connections web (components/sections/ConnectionsDiagram.tsx) */
+.web-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: web-spin 60s linear infinite;
+}
+.web-glow {
+  animation: web-glow 6s ease-in-out infinite;
+}
+.web-signal {
+  stroke-dasharray: 14 220;
+  stroke-dashoffset: 234;
+  animation: web-signal 4s ease-in infinite;
+}
+.web-halo {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: web-halo 3.2s ease-out infinite;
+}
+@keyframes web-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes web-glow {
+  0%,
+  100% {
+    stroke-opacity: 0.12;
+  }
+  50% {
+    stroke-opacity: 0.5;
+  }
+}
+@keyframes web-signal {
+  0% {
+    stroke-dashoffset: 234;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  60%,
+  100% {
+    stroke-dashoffset: 14;
+    opacity: 0;
+  }
+}
+@keyframes web-halo {
+  0% {
+    transform: scale(1);
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
+  .web-spin,
+  .web-glow,
+  .web-signal,
+  .web-halo {
+    animation: none;
+  }
+  .web-signal,
+  .web-halo {
+    opacity: 0;
+  }
   .map3d * {
     transition: none !important;
   }
