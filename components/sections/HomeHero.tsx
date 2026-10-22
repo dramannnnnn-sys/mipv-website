@@ -3,7 +3,8 @@ import { MapPin } from "lucide-react";
 import type { Dictionary } from "@/content/types";
 import { href, type Locale } from "@/lib/i18n";
 import { ButtonLink, Eyebrow } from "@/components/ui/primitives";
-import { Illustration } from "@/components/ui/Illustration";
+import { HeroTitle3D } from "@/components/ui/HeroTitle3D";
+import { RotatingGlobe } from "@/components/ui/RotatingGlobe";
 import { Logo } from "@/components/ui/Logo";
 
 export function HomeHero({ locale, dict }: { locale: Locale; dict: Dictionary }) {
@@ -19,14 +20,7 @@ export function HomeHero({ locale, dict }: { locale: Locale; dict: Dictionary })
       <div className="container-site grid items-center gap-10 py-10 md:py-12 lg:grid-cols-12 lg:gap-8 lg:py-12 xl:py-14">
         <div className="lg:col-span-7">
           <Eyebrow>{hero.eyebrow}</Eyebrow>
-          <h1 className="type-hero mt-5">
-            {hero.headline.map((word) => (
-              <span key={word} className="block">
-                {word.replace(/\.$/, "")}
-                <span className="text-crimson">.</span>
-              </span>
-            ))}
-          </h1>
+          <HeroTitle3D lines={hero.headline} />
           <p className="type-sub mt-5 text-brand">{hero.tagline}</p>
           <p className="type-lead mt-5 max-w-2xl text-ink/85">{hero.paragraph}</p>
           <div className="mt-7 flex flex-col gap-3 xs:flex-row xs:flex-wrap">
@@ -58,7 +52,7 @@ export function HomeHero({ locale, dict }: { locale: Locale; dict: Dictionary })
               />
             </div>
             <div className="absolute left-0 top-[12%] w-[86%] drop-shadow-[0_30px_40px_rgba(73,12,28,0.22)]">
-              <Illustration name="globe" priority />
+              <RotatingGlobe />
             </div>
             <div className="cut-corner-sm absolute bottom-[4%] left-0 w-[64%] bg-white px-6 py-5 shadow-[0_18px_40px_-18px_rgba(73,12,28,0.45)]">
               <Logo alt="MIPV" className="h-auto w-full" />
