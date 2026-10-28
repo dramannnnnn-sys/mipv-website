@@ -721,6 +721,9 @@ export const en = {
     copyright: "© 2026 MIPV. ALL RIGHTS RESERVED.",
     registration: "MIPV Consultancy · Business Registration No. 003830433-K",
     location: "Nilai, Negeri Sembilan, Malaysia · Remote-Based Operations",
+    visitorsToday: "Visitors today",
+    visitorsMonth: "Visitors this month",
+    visitorsTotal: "Total visitors",
   },
 
   legal: {
@@ -771,7 +774,7 @@ export const en = {
         {
           title: "7. Cookies and spam protection",
           body: [
-            "This website does not use advertising or analytics cookies. Where a spam-protection service is enabled on the enquiry form, it may process limited technical information to distinguish genuine visitors from automated submissions.",
+            "This website does not use advertising or analytics cookies. Where a spam-protection service is enabled on the enquiry form, it may process limited technical information to distinguish genuine visitors from automated submissions. The visitor count shown at the bottom of each page is anonymous: your browser stores only the date of your last visit so that you are counted once per day, and no personal information is collected.",
           ],
         },
         {

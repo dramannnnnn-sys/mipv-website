@@ -723,6 +723,9 @@ export const bm: Dictionary = {
     copyright: "© 2026 MIPV. HAK CIPTA TERPELIHARA.",
     registration: "MIPV Consultancy · No. Pendaftaran Perniagaan 003830433-K",
     location: "Nilai, Negeri Sembilan, Malaysia · Operasi Secara Jarak Jauh",
+    visitorsToday: "Pelawat hari ini",
+    visitorsMonth: "Pelawat bulan ini",
+    visitorsTotal: "Jumlah pelawat",
   },
 
   legal: {
@@ -773,7 +776,7 @@ export const bm: Dictionary = {
         {
           title: "7. Kuki dan perlindungan spam",
           body: [
-            "Laman web ini tidak menggunakan kuki pengiklanan atau analitik. Sekiranya perkhidmatan perlindungan spam diaktifkan pada borang pertanyaan, perkhidmatan tersebut mungkin memproses maklumat teknikal yang terhad bagi membezakan pelawat sebenar daripada penghantaran automatik.",
+            "Laman web ini tidak menggunakan kuki pengiklanan atau analitik. Sekiranya perkhidmatan perlindungan spam diaktifkan pada borang pertanyaan, perkhidmatan tersebut mungkin memproses maklumat teknikal yang terhad bagi membezakan pelawat sebenar daripada penghantaran automatik. Kiraan pelawat yang dipaparkan di bahagian bawah setiap halaman adalah tanpa nama: pelayar anda hanya menyimpan tarikh lawatan terakhir supaya anda dikira sekali sehari, dan tiada maklumat peribadi dikumpul.",
           ],
         },
         {

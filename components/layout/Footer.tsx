@@ -7,6 +7,7 @@ import { site, mailtoHref, telHref, tel2Href } from "@/lib/site";
 import { Logo } from "@/components/ui/Logo";
 import { BarMark } from "@/components/ui/primitives";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { VisitorCounter } from "./VisitorCounter";
 
 export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const { footer, nav, services } = dict;
@@ -103,6 +104,10 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
           <div className="space-y-1">
             <p className="font-heading font-extrabold tracking-[0.08em]">{footer.copyright}</p>
             <p className="text-white/80">{footer.registration}</p>
+            <VisitorCounter
+              locale={locale}
+              labels={{ today: footer.visitorsToday, month: footer.visitorsMonth, total: footer.visitorsTotal }}
+            />
           </div>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <Link href={href(locale, "privacy")} className="text-white/90 underline-offset-4 hover:text-white hover:underline">
