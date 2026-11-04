@@ -520,6 +520,13 @@ export const en = {
     subheading: "MULTIPLE DISCIPLINES. INTEGRATED DELIVERY.",
     intro:
       "MIPV delivers its multidisciplinary expertise through six complementary modes of delivery. An engagement may draw on a single mode or combine several, depending on the organisation's objectives and the scope of work.",
+    assessment: {
+      label: "NOW IN PILOT",
+      heading: "MIPV LEADERSHIP ASSESSMENT",
+      text: "An online situational judgement assessment covering four areas of leadership: decision making, strategic thinking, team management and emotional regulation. It is currently in a pilot study. Participants help us develop and validate the instrument and do not receive scores at this stage.",
+      cta: "Take part in the pilot",
+      note: "For leadership development only, not for selection or promotion decisions. The assessment is in English.",
+    },
     scope: {
       heading: "PROFESSIONAL SCOPE",
       text: "Psychometric, psychological, audit and other regulated or specialised services are delivered responsibly and only within appropriate professional qualifications, authorisations and scope. Any such requirement is clarified at the outset of an engagement.",
@@ -718,6 +725,7 @@ export const en = {
     privacy: "Privacy Policy",
     terms: "Website Terms",
     contact: "Contact",
+    assessment: "Leadership Assessment",
     copyright: "© 2026 MIPV. ALL RIGHTS RESERVED.",
     registration: "MIPV Consultancy · Business Registration No. 003830433-K",
     location: "Nilai, Negeri Sembilan, Malaysia · Remote-Based Operations",

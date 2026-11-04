@@ -21,6 +21,8 @@ export const site = {
   countryCode: "MY",
   /** Production URL. Override with NEXT_PUBLIC_SITE_URL for previews/staging. */
   url: (process.env.NEXT_PUBLIC_SITE_URL || "https://mipv.com.my").replace(/\/+$/, ""),
+  /** MIPV Leadership Assessment (separate app). Override with NEXT_PUBLIC_ASSESSMENT_URL. */
+  assessmentUrl: (process.env.NEXT_PUBLIC_ASSESSMENT_URL || "https://assessment.mipv.com.my").replace(/\/+$/, ""),
   copyrightYear: 2026,
   logo: {
     src: "/images/mipv-logo.png",
