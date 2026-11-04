@@ -521,6 +521,13 @@ export const bm: Dictionary = {
     subheading: "PELBAGAI DISIPLIN. PENYAMPAIAN BERSEPADU.",
     intro:
       "MIPV menyampaikan kepakaran multidisiplinnya melalui enam bentuk penyampaian yang saling melengkapi. Sesuatu penglibatan boleh menggunakan satu bentuk penyampaian atau menggabungkan beberapa bentuk, bergantung pada objektif organisasi dan skop kerja.",
+    assessment: {
+      label: "PERINGKAT RINTIS",
+      heading: "KOMPAS: PENILAIAN KEPIMPINAN MIPV",
+      text: "Penilaian dalam talian berasaskan pertimbangan situasi yang merangkumi empat bidang kepimpinan: membuat keputusan, pemikiran strategik, pengurusan pasukan dan pengawalan emosi. Penilaian ini kini di peringkat kajian rintis. Peserta membantu kami membangunkan dan mengesahkan instrumen ini, dan menerima keputusan sementara serta cadangan pembangunan.",
+      cta: "Sertai kajian rintis",
+      note: "Untuk pembangunan kepimpinan sahaja, bukan untuk keputusan pemilihan atau kenaikan pangkat. Penilaian disediakan dalam Bahasa Melayu dan Bahasa Inggeris.",
+    },
     scope: {
       heading: "SKOP PROFESIONAL",
       text: "Perkhidmatan psikometrik, psikologi, audit dan perkhidmatan lain yang dikawal selia atau khusus disampaikan secara bertanggungjawab dan hanya dalam lingkungan kelayakan, kebenaran dan skop profesional yang bersesuaian. Sebarang keperluan sedemikian akan dijelaskan pada peringkat awal penglibatan.",
@@ -720,6 +727,7 @@ export const bm: Dictionary = {
     privacy: "Dasar Privasi",
     terms: "Terma Laman Web",
     contact: "Hubungi",
+    assessment: "KOMPAS: Penilaian Kepimpinan",
     copyright: "© 2026 MIPV. HAK CIPTA TERPELIHARA.",
     registration: "MIPV Consultancy · No. Pendaftaran Perniagaan 003830433-K",
     location: "Nilai, Negeri Sembilan, Malaysia · Operasi Secara Jarak Jauh",

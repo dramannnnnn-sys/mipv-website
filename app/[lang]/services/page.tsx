@@ -112,6 +112,28 @@ export default async function ServicesPage({ params }: Props) {
                     </div>
                   </div>
                 </Reveal>
+                {s.id === "assessment-diagnostics" && (
+                  <Reveal className="mb-10 lg:mb-14">
+                    <aside
+                      aria-labelledby="leadership-assessment"
+                      className="grid gap-6 border-l-4 border-brand bg-rose-mist/60 p-7 md:p-9 lg:grid-cols-12 lg:items-center lg:gap-10"
+                    >
+                      <div className="lg:col-span-8">
+                        <p className="font-heading text-[0.8125rem] font-extrabold tracking-[0.16em] text-crimson">{sp.assessment.label}</p>
+                        <h3 id="leadership-assessment" className="mt-2 font-heading text-lg font-extrabold tracking-[0.12em] text-brand">
+                          {sp.assessment.heading}
+                        </h3>
+                        <p className="mt-3 text-ink/90">{sp.assessment.text}</p>
+                        <p className="mt-3 text-sm text-ink/75">{sp.assessment.note}</p>
+                      </div>
+                      <div className="lg:col-span-4 lg:text-right">
+                        <ButtonLink href={site.assessmentUrl} className="w-full sm:w-auto">
+                          {sp.assessment.cta}
+                        </ButtonLink>
+                      </div>
+                    </aside>
+                  </Reveal>
+                )}
               </li>
             ))}
           </ol>

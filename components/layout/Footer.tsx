@@ -119,6 +119,9 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
             <Link href={href(locale, "contact")} className="text-white/90 underline-offset-4 hover:text-white hover:underline">
               {footer.contact}
             </Link>
+            <a href={site.assessmentUrl} className="text-white/90 underline-offset-4 hover:text-white hover:underline">
+              {footer.assessment}
+            </a>
             <LanguageSwitcher locale={locale} label={nav.languageLabel} tone="light" />
           </div>
         </div>
